@@ -1,3 +1,4 @@
+//Imorts
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +9,27 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+/**
+ * Policy-Based Link State Routing with Gateway Constraints
+ * 
+ * This program implements a routing algorithm where:
+ * - Regular nodes can only route through other regular nodes
+ * - Gateways are destinations but cannot be used as intermediate hops
+ * - All traffic must pass through a designated Source Area (SA) node
+ * 
+ * The algorithm uses Dijkstra's algorithm with gateway blocking to compute:
+ * 1. Shortest paths from any node to the SA
+ * 2. Shortest paths from the SA to all gateways
+ * 3. Combines these to create forwarding tables for each regular node
+ */
 public class RouteToGateway {
+    // Infinity constant for Dijkstra's algorithm - using MAX_VALUE/4 to prevent overflow
     private static final long INF = Long.MAX_VALUE / 4;
 
+    /**
+     * Fast input scanner for reading integers efficiently
+     * Uses buffered I/O and manual parsing for better performance than Scanner
+     */
     private static class FastScanner {
         private final BufferedInputStream in = new BufferedInputStream(System.in);
         private final byte[] buffer = new byte[1 << 16];
